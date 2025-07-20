@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Official Dashboard</title>
+  <!-- اضافه کردن استایل CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+  <script src="login.js"></script>
+<main style="flex-direction: column; justify-content: center; align-items: center; flex-grow: 1;">
+  <div class="login-container" style="background: white; padding: 30px 40px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); max-width: 400px; width: 90%;">
+    <h2 style="margin-bottom: 25px; color: #1a2b48; text-align: center;">Login to Dashboard</h2>
+    <form id="loginForm" style="display: flex; flex-direction: column; gap: 15px;">
+      <input type="text" id="firstName" placeholder="First Name" required />
+      <input type="text" id="lastName" placeholder="Last Name" required />
+      <input type="text" id="passport" placeholder="Passport Number" required />
+      <input type="text" id="case" placeholder="Case Number" required />
+      <button type="submit" style="background-color: #4158d0; color: white; padding: 12px; font-weight: 700; border: none; border-radius: 5px; cursor: pointer;">Login</button>
+    </form>
+    <p id="errorMsg" style="color: red; margin-top: 15px; display: none; text-align: center;"></p>
+  </div>
+</main>
+
+</body>
+</html>
