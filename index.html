@@ -34,7 +34,23 @@
         <li><button disabled>Upload Personal Photo</button></li>
         <li><button disabled>Interview Invitation Date</button></li>
         <li><button disabled>Gernral Result</button></li>
-	<button class="logout-button" onclick="logout()">Logout</button>
+	<button id="logoutBtn">Logout</button>
+
+<script>
+  document.getElementById("logoutBtn").addEventListener("click", function() {
+    // نمایش پیام یا لودر دلخواه (اختیاری)
+    alert("Logging out. You will be redirected in 5 seconds.");
+
+    setTimeout(() => {
+      // هدایت به صفحه لاگین
+      window.location.href = "login.html";
+
+      // اگر می‌خواهی تب را ببندی (ممکن است کار نکند)
+      // window.close();
+    }, 5000);
+  });
+</script>
+
       </ul>
     </aside>
 
