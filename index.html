@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    .loader {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+    .error { color: red; margin-top: 10px; }
+    form {
+      max-width: 350px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #005fa3;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover { background-color: #004080; }
+  </style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <img src="loading.gif" alt="Loading..." />
+  </div>
+
+  <h2 style="text-align:center;">Login</h2>
+  <form id="loginForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="text" id="lastname" placeholder="Last Name" required />
+    <input type="text" id="nationality" placeholder="Nationality" required />
+    <input type="text" id="passport" placeholder="Passport or ID No" required />
+    <input type="text" id="caseNumber" placeholder="Case Number" required />
+    <button type="submit">Login</button>
+    <div class="error" id="errorMsg"></div>
+  </form>
+
+<script>
+  const loader = document.getElementById('loader');
+  const errorMsg = document.getElementById('errorMsg');
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    errorMsg.textContent = '';
+    loader.style.display = 'block';
+
+    const name = document.getElementById('name').value.trim().toLowerCase();
+    const lastname = document.getElementById('lastname').value.trim().toLowerCase();
+    const nationality = document.getElementById('nationality').value.trim().toLowerCase();
+    const passport = document.getElementById('passport').value.trim().toUpperCase();
+    const caseNumber = document.getElementById('caseNumber').value.trim().toUpperCase();
+
+    fetch('data.json')
+      .then(response => {
+        if(!response.ok) throw new Error('Could not load user data.');
+        return response.json();
+      })
+      .then(users => {
+        setTimeout(() => {
+          loader.style.display = 'none';
+          const user = users.find(u =>
+            u.name.toLowerCase() === name &&
+            u.lastname.toLowerCase() === lastname &&
+            u.nationality.toLowerCase() === nationality &&
+            u.passport.toUpperCase() === passport &&
+            u.caseNumber.toUpperCase() === caseNumber
+          );
+          if(user) {
+            window.location.href = user.redirectUrl;
+          } else {
+            errorMsg.textContent = 'Invalid login credentials. Please try again.';
+          }
+        }, 5000);
+      })
+      .catch(err => {
+        loader.style.display = 'none';
+        errorMsg.textContent = 'Error loading user data.';
+        console.error(err);
+      });
+  });
+</script>
+
+</body>
+</html>

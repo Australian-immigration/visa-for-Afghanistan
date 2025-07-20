@@ -1,0 +1,144 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #ffffff
+;
+  color: #333;
+}
+
+/* Loader */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.header {
+  position: relative; /* زمینه برای absolute */
+  height: 80px;       /* ارتفاع ثابت هدر */
+background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header .logo {
+  height: 60px;
+  z-index: 10; /* برای روی هم قرار نگرفتن */
+}
+
+.header h1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 24px;
+  color: #000000;
+  font-weight: bold;
+  white-space: nowrap; /* جلوگیری از شکست خط */
+  pointer-events: none; /* اگر میخوای روی متن کلیک نشه */
+}
+
+.header .logo {
+  height: 50px;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  min-height: 80vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #e0e7f1;
+  padding: 2rem 1rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.sidebar:hover {
+  transform: translateX(0);
+}
+
+.sidebar-menu li {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.sidebar-menu button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar-menu button:hover:enabled {
+  background-color: #0055a5;
+}
+
+.sidebar-menu button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+background-color: #ffffff;
+  padding: 15px 30px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #e0e0e0;
+}
+
+.footer .logo {
+  height: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    transform: translateX(-100%);
+  }
+
+  .sidebar:hover {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}
