@@ -65,6 +65,44 @@
     window.location.href = "login.html";
   }
 </script>
+<script>
+function login() {
+  const name = document.getElementById("name").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const nationality = document.getElementById("nationality").value.trim();
+  const passport = document.getElementById("passport").value.trim();
+  const caseNumber = document.getElementById("caseNumber").value.trim();
+
+  // نمایش لودینگ
+  document.getElementById("loader").style.display = "block";
+
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      const user = data.find(u =>
+        u.name === name &&
+        u.lastName === lastName &&
+        u.nationality === nationality &&
+        u.passport === passport &&
+        u.caseNumber === caseNumber
+      );
+
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+
+        if (user) {
+          window.location.href = "index.html";  // ✅ لینک دادن به داشبورد
+        } else {
+          alert("❌ اطلاعات وارد شده نادرست است");
+        }
+      }, 5000); // 5 ثانیه لودینگ
+    })
+    .catch(error => {
+      console.error("خطا در خواندن data.json:", error);
+      alert("مشکل در بارگذاری داده‌ها");
+    });
+}
+</script>
 
 </body>
 </html>
