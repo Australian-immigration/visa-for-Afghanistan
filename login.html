@@ -102,6 +102,13 @@
       });
   });
 </script>
+<script>
+  function loginSuccess() {
+    // فرض: اعتبارسنجی انجام شده و داده‌ها درست هستند
+    localStorage.setItem('isLoggedIn', 'true');
+    window.location.href = "index.html";
+  }
+</script>
 
 </body>
 </html>
